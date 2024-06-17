@@ -15,6 +15,8 @@ h1{
     text-align: center;
     margin: 25px 0 20px 0 ;
     letter-spacing: 6px;
+    font-size: 40px;
+    
 }
 
 
@@ -33,4 +35,41 @@ h1{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+/* image container  */
+
+.image-container{
+    margin: 10px 30%;
+
+}
+.image-container > img{
+    width: 100%;
+    margin-top: 5px;
+}
+
+
+
+/* Media query for Large smart phones */
+@media screen and (max-width: 600px){
+    h1{
+        font-size: 15px;
+        letter-spacing: 2px;
+    }
+    .image-container{
+        margin: 10px;
+    }
+}
+
+
+
+/* Media query for small smart phones (Iphone minis) */
+@media screen and (max-width: 400px){
+    h1{
+        font-size: 15px;
+        letter-spacing: 2px;
+    }
+    .image-container{
+        margin: 10px;
+    }
 }
