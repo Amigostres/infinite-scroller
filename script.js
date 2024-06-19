@@ -8,18 +8,18 @@ let photoArr = []
 
 //checks if all images are all loaded
 function imageLoaded(){
-    console.log("images Loaded");
     imagesLoaded++
     if(imagesLoaded === totalImages) {
         ready = true
+        loader.hidden = true
         console.log(`ready =`, ready);
     }
 }
 
 // Create Elements for links and photos
 function displayPhotos(){
+    imagesLoaded = 0
     totalImages = photoArr.length
-    console.log("total images", totalImages);
     //Run a forEach method
     photoArr.forEach(photo => {
         //Create <a> to link to unSplash
@@ -44,7 +44,6 @@ async function getPhotos(){
     try{
         const response = await fetch('http://localhost:8000/api');
         photoArr = await response.json()
-        console.log(`recived data from backend=======`);
         displayPhotos()
     }catch (e) {
         console.log('failed to get server request');
@@ -58,7 +57,8 @@ getPhotos()
 //check to see if user is close to the end, LOAD MORE PHOTOS!
 
 window.addEventListener("scroll", (e) => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000){
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 && ready){
+        ready = false
         getPhotos()
     }
 })
