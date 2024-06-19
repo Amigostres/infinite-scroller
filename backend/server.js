@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 
 app.get('/api', async (req, res) => {
     console.log('api use requested');
-    const count = 1
+    const count = 10
     const options = {
         method: "GET",
         url: `https://api.unsplash.com/photos/random/?client_id=${process.env.UNPLASH_API_KEY}&count=${count}`
