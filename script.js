@@ -1,10 +1,25 @@
 const imageContainer = document.getElementById("imageContainer")
 const loader = document.getElementById("loader")
 
+let ready = false;
+let imagesLoaded = 0
+let totalImages = 0
 let photoArr = []
+
+//checks if all images are all loaded
+function imageLoaded(){
+    console.log("images Loaded");
+    imagesLoaded++
+    if(imagesLoaded === totalImages) {
+        ready = true
+        console.log(`ready =`, ready);
+    }
+}
 
 // Create Elements for links and photos
 function displayPhotos(){
+    totalImages = photoArr.length
+    console.log("total images", totalImages);
     //Run a forEach method
     photoArr.forEach(photo => {
         //Create <a> to link to unSplash
@@ -16,6 +31,8 @@ function displayPhotos(){
         img.setAttribute("src", photo.urls.regular)
         img.setAttribute("alt", photo.alt_description)
         img.setAttribute("title", photo.alt_description)
+        //event listiner when the image is loaded
+        img.setAttribute('load', imageLoaded)
         //put <img> inside <a>
         item.appendChild(img)
         imageContainer.appendChild(item)
@@ -35,3 +52,13 @@ async function getPhotos(){
     }
 }
 getPhotos()
+
+
+
+//check to see if user is close to the end, LOAD MORE PHOTOS!
+
+window.addEventListener("scroll", (e) => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000){
+        getPhotos()
+    }
+})
